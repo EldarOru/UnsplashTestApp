@@ -12,6 +12,6 @@ interface TopicRepository {
 
     suspend fun letTopicsFlow(pagingConfig: PagingConfig = TopicRepositoryImpl.getDefaultPageConfig()) : Flow<PagingData<TopicItem>>
 
-    suspend fun letTopicPhotos(id: Int,
+    suspend fun letTopicPhotos(id: String,
                                pagingConfig: PagingConfig = TopicRepositoryImpl.getDefaultPageConfig()) : Flow<PagingData<PhotoItem>>
 }

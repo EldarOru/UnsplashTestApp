@@ -3,6 +3,7 @@ package com.example.unsplashtestapp.data.repositories
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import com.example.unsplashtestapp.data.datasources.PhotoDataSource
 import com.example.unsplashtestapp.data.datasources.TopicDataSource
 import com.example.unsplashtestapp.data.network.RetrofitClient
 import com.example.unsplashtestapp.domain.entitites.photo.PhotoItem
@@ -23,16 +24,13 @@ class TopicRepositoryImpl @Inject constructor(
     }
 
     override suspend fun letTopicPhotos(
-        id: Int,
+        id: String,
         pagingConfig: PagingConfig
     ): Flow<PagingData<PhotoItem>> {
-        /*
         return Pager(
             config = pagingConfig,
-            pagingSourceFactory = { TopicDataSource(retrofitClient) }
+            pagingSourceFactory = { PhotoDataSource(id = id, retrofitClient = retrofitClient) }
         ).flow
-         */
-        TODO()
     }
 
     companion object {

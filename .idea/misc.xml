@@ -4,7 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Projects/Android/UnsplashTestApp/app/src/main/res/layout/activity_main.xml" value="0.20885416666666667" />
+        <entry key="..\:/Projects/Android/UnsplashTestApp/app/src/main/res/layout/detailed_photo_fragment.xml" value="0.11141304347826086" />
         <entry key="..\:/Projects/Android/UnsplashTestApp/app/src/main/res/layout/loader.xml" value="0.1484375" />
+        <entry key="..\:/Projects/Android/UnsplashTestApp/app/src/main/res/layout/photo_fragment.xml" value="0.19270833333333334" />
+        <entry key="..\:/Projects/Android/UnsplashTestApp/app/src/main/res/layout/photo_item.xml" value="0.1581196581196581" />
         <entry key="..\:/Projects/Android/UnsplashTestApp/app/src/main/res/layout/topic_fragment.xml" value="0.2078125" />
         <entry key="..\:/Projects/Android/UnsplashTestApp/app/src/main/res/layout/topic_item.xml" value="0.2078125" />
       </map>

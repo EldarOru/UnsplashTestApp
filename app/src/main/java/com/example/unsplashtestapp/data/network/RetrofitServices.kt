@@ -11,8 +11,8 @@ interface RetrofitServices {
     suspend fun getTopics(@Query("page") page: Int = 1,
                           @Query("client_id") client_id: String = CLIENT_ID): List<TopicItem>
 
-    @GET("/topics/{id}")
-    suspend fun getTopicPhotos(@Path("id") id: Int,
+    @GET("/topics/{id}/photos")
+    suspend fun getTopicPhotos(@Path("id") id: String,
                                @Query("page") page: Int = 1,
                                @Query("client_id") client_id: String = CLIENT_ID): List<PhotoItem>
 

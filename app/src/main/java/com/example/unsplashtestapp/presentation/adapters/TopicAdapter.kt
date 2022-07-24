@@ -9,9 +9,7 @@ import com.example.unsplashtestapp.databinding.TopicItemBinding
 import com.example.unsplashtestapp.domain.entitites.topic.TopicItem
 import com.squareup.picasso.Picasso
 
-class TopicAdapter : PagingDataAdapter<TopicItem, TopicAdapter.TopicPagedHolder>(DIFF_CALLBACK) {
-
-    var onRepositoryClickListener: ((TopicItem) -> Unit)? = null
+class TopicAdapter(private val onTopicClickListener: ((TopicItem) -> Unit)? = null) : PagingDataAdapter<TopicItem, TopicAdapter.TopicPagedHolder>(DIFF_CALLBACK) {
 
     override fun onBindViewHolder(
         holder: TopicPagedHolder,
@@ -22,16 +20,12 @@ class TopicAdapter : PagingDataAdapter<TopicItem, TopicAdapter.TopicPagedHolder>
             topicName.text = topic?.title
             Picasso.get().load(topic?.cover_photo?.urls?.small).into(topicImage)
 
-            /*
             root.setOnClickListener {
-                if (rep != null) {
-                    onRepositoryClickListener?.invoke(rep)
+                if (topic != null) {
+                    onTopicClickListener?.invoke(topic)
                 }
             }
-
-             */
         }
-
     }
 
     override fun onCreateViewHolder(
