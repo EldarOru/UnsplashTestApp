@@ -6,12 +6,11 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.unsplashtestapp.databinding.PhotoItemBinding
-import com.example.unsplashtestapp.databinding.TopicItemBinding
 import com.example.unsplashtestapp.domain.entitites.photo.PhotoItem
-import com.example.unsplashtestapp.domain.entitites.topic.TopicItem
 import com.squareup.picasso.Picasso
 
-class PhotoAdapter(private val onPhotoClickListener: ((PhotoItem) -> Unit)? = null): PagingDataAdapter<PhotoItem, PhotoAdapter.PhotoPagedHolder>(DIFF_CALLBACK) {
+class PhotoAdapter(private val onPhotoClickListener: ((PhotoItem) -> Unit)? = null)
+    : PagingDataAdapter<PhotoItem, PhotoAdapter.PhotoPagedHolder>(DIFF_CALLBACK) {
 
     override fun onBindViewHolder(
         holder: PhotoPagedHolder,

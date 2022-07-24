@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
@@ -23,11 +22,10 @@ import kotlinx.coroutines.launch
 import java.lang.RuntimeException
 
 @AndroidEntryPoint
-class TopicFragment: Fragment() {
+class TopicFragment: BaseFragment<TopicFragmentBinding>() {
 
     private lateinit var onFragmentsInteractionsListener: OnFragmentInteractionsListener
     private val topicFragmentViewModel: TopicFragmentViewModel by viewModels()
-    private lateinit var topicFragmentBinding: TopicFragmentBinding
     private lateinit var topicAdapter: TopicAdapter
 
     override fun onAttach(context: Context) {
@@ -39,14 +37,10 @@ class TopicFragment: Fragment() {
         }
     }
 
-    override fun onCreateView(
+    override fun initBinding(
         inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        topicFragmentBinding = TopicFragmentBinding.inflate(inflater, container, false)
-        return topicFragmentBinding.root
-    }
+        container: ViewGroup?
+    ): TopicFragmentBinding = TopicFragmentBinding.inflate(inflater, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -57,7 +51,7 @@ class TopicFragment: Fragment() {
     }
 
     private fun setRecyclerView() {
-        val recyclerView = topicFragmentBinding.topicRv
+        val recyclerView = binding.topicRv
         recyclerView.layoutManager = LinearLayoutManager(context)
         topicAdapter = TopicAdapter(onTopicClickListener = {
             onFragmentsInteractionsListener.onAddBackStack(
@@ -81,7 +75,7 @@ class TopicFragment: Fragment() {
     }
 
     private fun setOnClick() {
-        topicFragmentBinding.btnRetry.setOnClickListener {
+        binding.btnRetry.setOnClickListener {
             topicAdapter.retry()
         }
     }
@@ -89,17 +83,17 @@ class TopicFragment: Fragment() {
     private fun setLoadStateListener(){
         topicAdapter.addLoadStateListener {
             if (it.refresh is LoadState.Loading){
-                topicFragmentBinding.btnRetry.visibility = View.GONE
+                binding.btnRetry.visibility = View.GONE
 
-                topicFragmentBinding.progressBar.visibility = View.VISIBLE
+                binding.progressBar.visibility = View.VISIBLE
             }
             else {
-                topicFragmentBinding.progressBar.visibility = View.GONE
+                binding.progressBar.visibility = View.GONE
                 val errorState = when {
                     it.append is LoadState.Error -> it.append as LoadState.Error
                     it.prepend is LoadState.Error -> it.prepend as LoadState.Error
                     it.refresh is LoadState.Error -> {
-                        topicFragmentBinding.btnRetry.visibility = View.VISIBLE
+                        binding.btnRetry.visibility = View.VISIBLE
                         it.refresh as LoadState.Error
                     }
                     else -> null
@@ -110,4 +104,5 @@ class TopicFragment: Fragment() {
             }
         }
     }
+
 }
