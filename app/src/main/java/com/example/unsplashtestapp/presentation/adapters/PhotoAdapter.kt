@@ -6,51 +6,39 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.unsplashtestapp.databinding.PhotoItemBinding
-import com.example.unsplashtestapp.domain.entitites.photo.PhotoItem
+import com.example.unsplashtestapp.databinding.TopicItemBinding
+import com.example.unsplashtestapp.domain.entitites.PhotoItem
+import com.example.unsplashtestapp.domain.entitites.TopicItem
 import com.squareup.picasso.Picasso
 
-class PhotoAdapter(private val onPhotoClickListener: ((PhotoItem) -> Unit)? = null)
-    : PagingDataAdapter<PhotoItem, PhotoAdapter.PhotoPagedHolder>(DIFF_CALLBACK) {
+class PhotoAdapter(override val clickListener: ((PhotoItem) -> Unit)?
+): BaseAdapter<PhotoItem, PhotoItemBinding>(
+    clickListener = clickListener,
+    diffCallback = PhotoCallback()){
 
     override fun onBindViewHolder(
-        holder: PhotoPagedHolder,
+        holder: ViewHolder,
         position: Int
     ) {
         val photo: PhotoItem? = getItem(position)
-        holder.photoBinging.apply {
+        holder.binding.apply {
             Picasso.get().load(photo?.urls?.regular).into(photoImage)
-            root.setOnClickListener {
-                if (photo != null) {
-                    onPhotoClickListener?.invoke(photo)
-                }
-            }
         }
+        setClickListener(photo, holder.binding)
     }
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): PhotoPagedHolder {
-        val photoView =
-            PhotoItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return PhotoPagedHolder(photoView)
-    }
+    override fun initBinding(parent: ViewGroup, viewType: Int): PhotoItemBinding
+            = PhotoItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
-    class PhotoPagedHolder(val photoBinging: PhotoItemBinding) :
-        RecyclerView.ViewHolder(photoBinging.root)
+    class PhotoCallback: DiffUtil.ItemCallback<PhotoItem>() {
+        override fun areItemsTheSame(
+            oldConcert: PhotoItem,
+            newConcert: PhotoItem
+        ) = oldConcert.id == newConcert.id
 
-    companion object {
-        private val DIFF_CALLBACK = object :
-            DiffUtil.ItemCallback<PhotoItem>() {
-            override fun areItemsTheSame(
-                oldConcert: PhotoItem,
-                newConcert: PhotoItem
-            ) = oldConcert.id == newConcert.id
-
-            override fun areContentsTheSame(
-                oldConcert: PhotoItem,
-                newConcert: PhotoItem
-            ) = oldConcert == newConcert
-        }
+        override fun areContentsTheSame(
+            oldConcert: PhotoItem,
+            newConcert: PhotoItem
+        ) = oldConcert == newConcert
     }
 }

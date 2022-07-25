@@ -1,7 +1,7 @@
 package com.example.unsplashtestapp.data.network
 
-import com.example.unsplashtestapp.domain.entitites.photo.PhotoItem
-import com.example.unsplashtestapp.domain.entitites.topic.TopicItem
+import com.example.unsplashtestapp.domain.entitites.PhotoItem
+import com.example.unsplashtestapp.domain.entitites.TopicItem
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

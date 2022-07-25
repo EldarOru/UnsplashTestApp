@@ -18,54 +18,57 @@ import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.IOException
 import java.lang.Exception
 
 
-class DetailedPhotoFragment: Fragment() {
+class DetailedPhotoFragment: BaseFragment<DetailedPhotoFragmentBinding>() {
 
-    private lateinit var detailedPhotoFragmentBinding: DetailedPhotoFragmentBinding
+   private var comeURL = ""
 
-    override fun onCreateView(
+    override fun initBinding(
         inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        detailedPhotoFragmentBinding = DetailedPhotoFragmentBinding.inflate(inflater, container, false)
-        return detailedPhotoFragmentBinding.root
-    }
+        container: ViewGroup?
+    ): DetailedPhotoFragmentBinding = DetailedPhotoFragmentBinding.inflate(inflater, container, false)
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        comeURL = requireArguments().getString(URL).toString()
         setWallpaper()
         setOnClick()
     }
 
     private fun setWallpaper() {
-        Picasso.get().load(requireArguments().getString(URL).toString())
-            .into(detailedPhotoFragmentBinding.detailedPhotoImage)
+        Picasso.get().load(comeURL)
+            .into(binding.detailedPhotoImage)
     }
 
     private fun setOnClick(){
-        detailedPhotoFragmentBinding.wallpaperBtn.setOnClickListener {
-            Picasso.get().load(requireArguments().getString(URL).toString()).into(object : Target {
+        binding.wallpaperBtn.setOnClickListener {
+            Picasso.get().load(comeURL).into(object : Target {
                 override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
                     val wallpaperManager = WallpaperManager.getInstance(context)
                     try {
                         lifecycleScope.launch(Dispatchers.IO) {
                             wallpaperManager.setBitmap(bitmap)
+                            withContext(Dispatchers.Main) {
+                                Toast.makeText(context, "Done", Toast.LENGTH_SHORT).show()
+                            }
                         }
                     } catch (ex: IOException) {
                         ex.printStackTrace()
+                        Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show()
                     }
                 }
 
                 override fun onBitmapFailed(e: Exception?, errorDrawable: Drawable?) {
-
+                    Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show()
                 }
 
                 override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
-
+                    Toast.makeText(context, "Wait", Toast.LENGTH_SHORT).show()
                 }
             })
         }

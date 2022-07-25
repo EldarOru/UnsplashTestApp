@@ -1,4 +1,6 @@
-package com.example.unsplashtestapp.domain.entitites.topic
+package com.example.unsplashtestapp.domain.entitites
+
+import com.example.unsplashtestapp.domain.entitites.supportentities.CoverPhoto
 
 data class TopicItem(
     val cover_photo: CoverPhoto,

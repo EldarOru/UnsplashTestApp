@@ -1,8 +1,8 @@
 package com.example.unsplashtestapp.di
 
 import com.example.unsplashtestapp.data.network.RetrofitClient
-import com.example.unsplashtestapp.data.repositories.TopicRepositoryImpl
-import com.example.unsplashtestapp.domain.repositories.TopicRepository
+import com.example.unsplashtestapp.data.repositories.MainRepositoryImpl
+import com.example.unsplashtestapp.domain.repositories.MainRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,8 +15,8 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideQuotesRepository(retrofitClient: RetrofitClient): TopicRepository{
-        return TopicRepositoryImpl(retrofitClient)
+    fun provideQuotesRepository(retrofitClient: RetrofitClient): MainRepository{
+        return MainRepositoryImpl(retrofitClient)
     }
 
     @Provides

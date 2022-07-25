@@ -53,7 +53,7 @@ class TopicFragment: BaseFragment<TopicFragmentBinding>() {
     private fun setRecyclerView() {
         val recyclerView = binding.topicRv
         recyclerView.layoutManager = LinearLayoutManager(context)
-        topicAdapter = TopicAdapter(onTopicClickListener = {
+        topicAdapter = TopicAdapter(clickListener = {
             onFragmentsInteractionsListener.onAddBackStack(
                 "new fragment",
                 PhotoFragment.newInstancePhotoFragment(

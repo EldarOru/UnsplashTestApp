@@ -53,7 +53,7 @@ class PhotoFragment: BaseFragment<PhotoFragmentBinding>() {
     private fun setRecyclerView() {
         val recyclerView = binding.photoRv
         recyclerView.layoutManager = LinearLayoutManager(context)
-        photoAdapter = PhotoAdapter(onPhotoClickListener = {
+        photoAdapter = PhotoAdapter(clickListener = {
             onFragmentsInteractionsListener.onAddBackStack(
                 "new fragment",
                 DetailedPhotoFragment.newInstanceDetailedPhotoFragment(

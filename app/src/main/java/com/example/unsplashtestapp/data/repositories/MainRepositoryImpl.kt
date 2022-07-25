@@ -6,15 +6,15 @@ import androidx.paging.PagingData
 import com.example.unsplashtestapp.data.datasources.PhotoDataSource
 import com.example.unsplashtestapp.data.datasources.TopicDataSource
 import com.example.unsplashtestapp.data.network.RetrofitClient
-import com.example.unsplashtestapp.domain.entitites.photo.PhotoItem
-import com.example.unsplashtestapp.domain.entitites.topic.TopicItem
-import com.example.unsplashtestapp.domain.repositories.TopicRepository
+import com.example.unsplashtestapp.domain.entitites.PhotoItem
+import com.example.unsplashtestapp.domain.entitites.TopicItem
+import com.example.unsplashtestapp.domain.repositories.MainRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class TopicRepositoryImpl @Inject constructor(
+class MainRepositoryImpl @Inject constructor(
     private val retrofitClient: RetrofitClient
-) : TopicRepository {
+) : MainRepository {
 
     override suspend fun letTopicsFlow(pagingConfig: PagingConfig): Flow<PagingData<TopicItem>> {
         return Pager(

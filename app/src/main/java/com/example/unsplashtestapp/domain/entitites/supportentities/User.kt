@@ -1,4 +1,6 @@
-package com.example.unsplashtestapp.domain.entitites.topic
+package com.example.unsplashtestapp.domain.entitites.supportentities
+
+import com.example.unsplashtestapp.domain.entitites.supportentities.ProfileImage
 
 data class User(
     val bio: String,

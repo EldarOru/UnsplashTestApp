@@ -2,8 +2,8 @@ package com.example.unsplashtestapp.data.datasources
 
 import androidx.paging.PagingSource
 import com.example.unsplashtestapp.data.network.RetrofitClient
-import com.example.unsplashtestapp.data.repositories.TopicRepositoryImpl.Companion.DEFAULT_PAGE_INDEX
-import com.example.unsplashtestapp.domain.entitites.topic.TopicItem
+import com.example.unsplashtestapp.data.repositories.MainRepositoryImpl.Companion.DEFAULT_PAGE_INDEX
+import com.example.unsplashtestapp.domain.entitites.TopicItem
 import retrofit2.HttpException
 import java.io.IOException
 

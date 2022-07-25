@@ -2,56 +2,40 @@ package com.example.unsplashtestapp.presentation.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.RecyclerView
 import com.example.unsplashtestapp.databinding.TopicItemBinding
-import com.example.unsplashtestapp.domain.entitites.topic.TopicItem
+import com.example.unsplashtestapp.domain.entitites.TopicItem
 import com.squareup.picasso.Picasso
 
-class TopicAdapter(private val onTopicClickListener: ((TopicItem) -> Unit)? = null) : PagingDataAdapter<TopicItem, TopicAdapter.TopicPagedHolder>(DIFF_CALLBACK) {
+class TopicAdapter(override val clickListener: ((TopicItem) -> Unit)?
+): BaseAdapter<TopicItem, TopicItemBinding>(
+    clickListener = clickListener,
+    diffCallback = TopicCallback()){
 
     override fun onBindViewHolder(
-        holder: TopicPagedHolder,
+        holder: ViewHolder,
         position: Int
     ) {
         val topic: TopicItem? = getItem(position)
-        holder.topicBinging.apply {
+        holder.binding.apply {
             topicName.text = topic?.title
             Picasso.get().load(topic?.cover_photo?.urls?.small).into(topicImage)
-
-            root.setOnClickListener {
-                if (topic != null) {
-                    onTopicClickListener?.invoke(topic)
-                }
-            }
         }
+        setClickListener(topic, holder.binding)
     }
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): TopicPagedHolder {
-        val topicView =
-            TopicItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return TopicPagedHolder(topicView)
-    }
+    override fun initBinding(parent: ViewGroup, viewType: Int): TopicItemBinding
+    = TopicItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
-    class TopicPagedHolder(val topicBinging: TopicItemBinding) :
-        RecyclerView.ViewHolder(topicBinging.root)
+    class TopicCallback: DiffUtil.ItemCallback<TopicItem>() {
+        override fun areItemsTheSame(
+            oldConcert: TopicItem,
+            newConcert: TopicItem
+        ) = oldConcert.id == newConcert.id
 
-    companion object {
-        private val DIFF_CALLBACK = object :
-            DiffUtil.ItemCallback<TopicItem>() {
-            override fun areItemsTheSame(
-                oldConcert: TopicItem,
-                newConcert: TopicItem
-            ) = oldConcert.id == newConcert.id
-
-            override fun areContentsTheSame(
-                oldConcert: TopicItem,
-                newConcert: TopicItem
-            ) = oldConcert == newConcert
-        }
+        override fun areContentsTheSame(
+            oldConcert: TopicItem,
+            newConcert: TopicItem
+        ) = oldConcert == newConcert
     }
 }

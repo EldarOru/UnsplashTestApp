@@ -1,4 +1,4 @@
-package com.example.unsplashtestapp.domain.entitites.topic
+package com.example.unsplashtestapp.domain.entitites.supportentities
 
 data class ProfileImage(
     val large: String,
