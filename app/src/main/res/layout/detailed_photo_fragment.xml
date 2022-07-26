@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="@string/set_wallpaper"
+        android:text="@string/set_as_wallpaper"
         app:layout_constraintBottom_toBottomOf="parent"
         android:id="@+id/wallpaper_btn">
 

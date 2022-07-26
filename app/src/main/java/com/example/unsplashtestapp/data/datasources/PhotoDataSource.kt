@@ -10,8 +10,7 @@ import java.io.IOException
 class PhotoDataSource constructor(
     private val retrofitClient: RetrofitClient,
     private val id: String
-) :
-    PagingSource<Int, PhotoItem>() {
+) : PagingSource<Int, PhotoItem>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, PhotoItem> {
         val page = params.key ?: MainRepositoryImpl.DEFAULT_PAGE_INDEX

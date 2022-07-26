@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">UnsplashTestApp</string>
-    <string name="set_wallpaper">Set wallpaper</string>
+    <string name="set_as_wallpaper">Set as wallpaper</string>
 </resources>
