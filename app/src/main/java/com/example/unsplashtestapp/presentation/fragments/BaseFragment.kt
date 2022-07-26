@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 
-abstract class BaseFragment<B: ViewBinding>: Fragment() {
+abstract class BaseFragment<B : ViewBinding> : Fragment() {
 
     private var viewBinding: B? = null
     protected val binding get() = checkNotNull(viewBinding)

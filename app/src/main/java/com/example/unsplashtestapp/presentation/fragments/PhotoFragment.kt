@@ -21,7 +21,7 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class PhotoFragment: BaseFragment<PhotoFragmentBinding>() {
+class PhotoFragment : BaseFragment<PhotoFragmentBinding>() {
 
     private lateinit var onFragmentsInteractionsListener: OnFragmentInteractionsListener
     private val photoFragmentViewModel: PhotoFragmentViewModel by viewModels()
@@ -30,9 +30,9 @@ class PhotoFragment: BaseFragment<PhotoFragmentBinding>() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is OnFragmentInteractionsListener){
+        if (context is OnFragmentInteractionsListener) {
             onFragmentsInteractionsListener = context
-        }else{
+        } else {
             throw RuntimeException("Activity must implement OnFragmentInteractionsListener")
         }
     }
@@ -57,12 +57,12 @@ class PhotoFragment: BaseFragment<PhotoFragmentBinding>() {
             onFragmentsInteractionsListener.onAddBackStack(
                 "new fragment",
                 DetailedPhotoFragment.newInstanceDetailedPhotoFragment(
-                    url = it.urls.full
+                    url = it.urls.regular
                 )
             )
         })
         recyclerView.adapter = photoAdapter.withLoadStateFooter(
-            footer = LoaderStateAdapter{photoAdapter.retry()}
+            footer = LoaderStateAdapter { photoAdapter.retry() }
         )
     }
 
@@ -81,14 +81,13 @@ class PhotoFragment: BaseFragment<PhotoFragmentBinding>() {
         }
     }
 
-    private fun setLoadStateListener(){
+    private fun setLoadStateListener() {
         photoAdapter.addLoadStateListener {
-            if (it.refresh is LoadState.Loading){
+            if (it.refresh is LoadState.Loading) {
                 binding.btnRetry.visibility = View.GONE
 
                 binding.progressBar.visibility = View.VISIBLE
-            }
-            else {
+            } else {
                 binding.progressBar.visibility = View.GONE
                 val errorState = when {
                     it.append is LoadState.Error -> it.append as LoadState.Error
@@ -107,13 +106,14 @@ class PhotoFragment: BaseFragment<PhotoFragmentBinding>() {
     }
 
     companion object {
-        fun newInstancePhotoFragment(id: String): PhotoFragment{
+        fun newInstancePhotoFragment(id: String): PhotoFragment {
             return PhotoFragment().apply {
                 arguments = Bundle().apply {
                     putString(ID_TAG, id)
                 }
             }
         }
+
         private const val ID_TAG = "ID"
     }
 }

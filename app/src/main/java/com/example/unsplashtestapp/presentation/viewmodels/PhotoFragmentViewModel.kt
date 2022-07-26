@@ -13,7 +13,7 @@ import javax.inject.Inject
 @HiltViewModel
 class PhotoFragmentViewModel @Inject constructor(
     private val repository: MainRepository
-    ): ViewModel() {
+) : ViewModel() {
 
     suspend fun fetchPhotos(id: String): Flow<PagingData<PhotoItem>> {
         return repository.letTopicPhotos(id = id)

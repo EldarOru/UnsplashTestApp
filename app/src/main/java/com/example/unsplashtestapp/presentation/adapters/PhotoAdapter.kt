@@ -2,19 +2,17 @@ package com.example.unsplashtestapp.presentation.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.RecyclerView
 import com.example.unsplashtestapp.databinding.PhotoItemBinding
-import com.example.unsplashtestapp.databinding.TopicItemBinding
 import com.example.unsplashtestapp.domain.entitites.PhotoItem
-import com.example.unsplashtestapp.domain.entitites.TopicItem
 import com.squareup.picasso.Picasso
 
-class PhotoAdapter(override val clickListener: ((PhotoItem) -> Unit)?
-): BaseAdapter<PhotoItem, PhotoItemBinding>(
+class PhotoAdapter(
+    override val clickListener: ((PhotoItem) -> Unit)?
+) : BaseAdapter<PhotoItem, PhotoItemBinding>(
     clickListener = clickListener,
-    diffCallback = PhotoCallback()){
+    diffCallback = PhotoCallback()
+) {
 
     override fun onBindViewHolder(
         holder: ViewHolder,
@@ -27,10 +25,10 @@ class PhotoAdapter(override val clickListener: ((PhotoItem) -> Unit)?
         setClickListener(photo, holder.binding)
     }
 
-    override fun initBinding(parent: ViewGroup, viewType: Int): PhotoItemBinding
-            = PhotoItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+    override fun initBinding(parent: ViewGroup, viewType: Int): PhotoItemBinding =
+        PhotoItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
-    class PhotoCallback: DiffUtil.ItemCallback<PhotoItem>() {
+    class PhotoCallback : DiffUtil.ItemCallback<PhotoItem>() {
         override fun areItemsTheSame(
             oldConcert: PhotoItem,
             newConcert: PhotoItem

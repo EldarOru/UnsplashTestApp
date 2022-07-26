@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 
-abstract class BaseAdapter<O: Any, B: ViewBinding>(
+abstract class BaseAdapter<O : Any, B : ViewBinding>(
     protected open val clickListener: ((O) -> Unit)? = null,
-    protected val diffCallback: DiffUtil.ItemCallback<O>)
-    : PagingDataAdapter<O, BaseAdapter<O, B>.ViewHolder>(diffCallback = diffCallback){
+    protected val diffCallback: DiffUtil.ItemCallback<O>
+) : PagingDataAdapter<O, BaseAdapter<O, B>.ViewHolder>(diffCallback = diffCallback) {
 
     protected abstract fun initBinding(parent: ViewGroup, viewType: Int): B
 
@@ -25,6 +25,6 @@ abstract class BaseAdapter<O: Any, B: ViewBinding>(
         }
     }
 
-    inner class ViewHolder(val binding: B): RecyclerView.ViewHolder(binding.root)
+    inner class ViewHolder(val binding: B) : RecyclerView.ViewHolder(binding.root)
 
 }

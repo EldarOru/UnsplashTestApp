@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
 import java.lang.RuntimeException
 
 @AndroidEntryPoint
-class TopicFragment: BaseFragment<TopicFragmentBinding>() {
+class TopicFragment : BaseFragment<TopicFragmentBinding>() {
 
     private lateinit var onFragmentsInteractionsListener: OnFragmentInteractionsListener
     private val topicFragmentViewModel: TopicFragmentViewModel by viewModels()
@@ -30,9 +30,9 @@ class TopicFragment: BaseFragment<TopicFragmentBinding>() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is OnFragmentInteractionsListener){
+        if (context is OnFragmentInteractionsListener) {
             onFragmentsInteractionsListener = context
-        }else{
+        } else {
             throw RuntimeException("Activity must implement OnFragmentInteractionsListener")
         }
     }
@@ -62,7 +62,7 @@ class TopicFragment: BaseFragment<TopicFragmentBinding>() {
             )
         })
         recyclerView.adapter = topicAdapter.withLoadStateFooter(
-            footer = LoaderStateAdapter{topicAdapter.retry()}
+            footer = LoaderStateAdapter { topicAdapter.retry() }
         )
     }
 
@@ -80,14 +80,13 @@ class TopicFragment: BaseFragment<TopicFragmentBinding>() {
         }
     }
 
-    private fun setLoadStateListener(){
+    private fun setLoadStateListener() {
         topicAdapter.addLoadStateListener {
-            if (it.refresh is LoadState.Loading){
+            if (it.refresh is LoadState.Loading) {
                 binding.btnRetry.visibility = View.GONE
 
                 binding.progressBar.visibility = View.VISIBLE
-            }
-            else {
+            } else {
                 binding.progressBar.visibility = View.GONE
                 val errorState = when {
                     it.append is LoadState.Error -> it.append as LoadState.Error

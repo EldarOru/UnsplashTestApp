@@ -7,7 +7,10 @@ import com.example.unsplashtestapp.domain.entitites.PhotoItem
 import retrofit2.HttpException
 import java.io.IOException
 
-class PhotoDataSource constructor(private val retrofitClient: RetrofitClient, private val id: String) :
+class PhotoDataSource constructor(
+    private val retrofitClient: RetrofitClient,
+    private val id: String
+) :
     PagingSource<Int, PhotoItem>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, PhotoItem> {
@@ -15,7 +18,8 @@ class PhotoDataSource constructor(private val retrofitClient: RetrofitClient, pr
         return try {
             val response = retrofitClient.retrofitServices.getTopicPhotos(id = id, page = page)
             LoadResult.Page(
-                response, prevKey = if (page == MainRepositoryImpl.DEFAULT_PAGE_INDEX) null else page - 1,
+                response,
+                prevKey = if (page == MainRepositoryImpl.DEFAULT_PAGE_INDEX) null else page - 1,
                 nextKey = if (response.isEmpty()) null else page + 1
             )
         } catch (exception: IOException) {

@@ -7,10 +7,12 @@ import com.example.unsplashtestapp.databinding.TopicItemBinding
 import com.example.unsplashtestapp.domain.entitites.TopicItem
 import com.squareup.picasso.Picasso
 
-class TopicAdapter(override val clickListener: ((TopicItem) -> Unit)?
-): BaseAdapter<TopicItem, TopicItemBinding>(
+class TopicAdapter(
+    override val clickListener: ((TopicItem) -> Unit)?
+) : BaseAdapter<TopicItem, TopicItemBinding>(
     clickListener = clickListener,
-    diffCallback = TopicCallback()){
+    diffCallback = TopicCallback()
+) {
 
     override fun onBindViewHolder(
         holder: ViewHolder,
@@ -24,10 +26,10 @@ class TopicAdapter(override val clickListener: ((TopicItem) -> Unit)?
         setClickListener(topic, holder.binding)
     }
 
-    override fun initBinding(parent: ViewGroup, viewType: Int): TopicItemBinding
-    = TopicItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+    override fun initBinding(parent: ViewGroup, viewType: Int): TopicItemBinding =
+        TopicItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
-    class TopicCallback: DiffUtil.ItemCallback<TopicItem>() {
+    class TopicCallback : DiffUtil.ItemCallback<TopicItem>() {
         override fun areItemsTheSame(
             oldConcert: TopicItem,
             newConcert: TopicItem

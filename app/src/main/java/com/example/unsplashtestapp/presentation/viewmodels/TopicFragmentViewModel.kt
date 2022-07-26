@@ -13,11 +13,10 @@ import javax.inject.Inject
 @HiltViewModel
 class TopicFragmentViewModel @Inject constructor(
     private val repository: MainRepository
-    ): ViewModel() {
+) : ViewModel() {
 
     suspend fun fetchTopics(): Flow<PagingData<TopicItem>> {
         return repository.letTopicsFlow()
             .cachedIn(viewModelScope)
     }
-
 }
